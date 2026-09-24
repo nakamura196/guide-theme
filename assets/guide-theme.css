@@ -1,0 +1,345 @@
+/*
+ * guide-theme — アプリの利用者向けガイド（非技術者向け）のためのテーマ。
+ * https://github.com/nakamura196/guide-theme
+ *
+ * 色は --gt-* の変数で変えられる。アクセント色は、ページの型（_layouts/guide.html）が
+ * サイト設定の guide_theme.accent から --gt-accent に入れる。
+ */
+
+:root {
+  --gt-accent: #2563eb;
+  --gt-accent-ink: #ffffff;
+  --gt-bg: #f6f7f9;
+  --gt-surface: #ffffff;
+  --gt-ink: #1f2430;
+  --gt-muted: #5b6475;
+  --gt-line: #e3e6ec;
+  --gt-soft: color-mix(in srgb, var(--gt-accent) 9%, var(--gt-surface));
+  --gt-point: #0f9d6b;
+  --gt-note: #2563eb;
+  --gt-warn: #d97706;
+  --gt-radius: 14px;
+  --gt-shadow: 0 1px 2px rgb(16 24 40 / 5%), 0 4px 16px rgb(16 24 40 / 6%);
+  --gt-font: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI",
+    "Meiryo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gt-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --gt-top-h: 60px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gt-bg: #12151b;
+    --gt-surface: #1a1e26;
+    --gt-ink: #e6e9ef;
+    --gt-muted: #a3abba;
+    --gt-line: #2b313c;
+    --gt-point: #34d399;
+    --gt-note: #7aa7ff;
+    --gt-warn: #fbbf24;
+    --gt-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--gt-top-h) + 16px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body.gt {
+  margin: 0;
+  background: var(--gt-bg);
+  color: var(--gt-ink);
+  font-family: var(--gt-font);
+  font-size: 17px;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+.gt a { color: var(--gt-accent); text-underline-offset: 3px; }
+.gt a:hover { text-decoration-thickness: 2px; }
+.gt :focus-visible { outline: 3px solid color-mix(in srgb, var(--gt-accent) 60%, transparent); outline-offset: 2px; border-radius: 4px; }
+
+.gt-skip { position: absolute; left: -9999px; }
+.gt-skip:focus { left: 16px; top: 8px; z-index: 100; background: var(--gt-surface); padding: 8px 12px; }
+
+/* ── 上の帯 ───────────────────────────── */
+
+.gt-top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--gt-top-h);
+  background: color-mix(in srgb, var(--gt-surface) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--gt-line);
+}
+.gt-top-inner {
+  max-width: 1200px; height: 100%; margin: 0 auto; padding: 0 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.gt-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 17px; color: var(--gt-ink) !important; text-decoration: none;
+  white-space: nowrap; min-width: 0;
+}
+.gt-brand img { width: 30px; height: 30px; border-radius: 8px; }
+.gt-brand-mark {
+  width: 30px; height: 30px; border-radius: 8px; flex: none;
+  display: grid; place-items: center;
+  background: var(--gt-accent); color: var(--gt-accent-ink); font-size: 15px;
+}
+.gt-brand span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.gt-nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.gt-nav a {
+  color: var(--gt-muted); text-decoration: none; font-size: 15px;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+}
+.gt-nav a:hover { background: var(--gt-soft); color: var(--gt-ink); }
+.gt-nav a.gt-lang {
+  border: 1px solid var(--gt-line); color: var(--gt-ink); font-weight: 600;
+}
+@media (max-width: 640px) {
+  .gt-nav a:not(.gt-lang) { display: none; }
+}
+
+/* ── 冒頭（ページ名と入口のカード） ─────── */
+
+.gt-hero {
+  background:
+    radial-gradient(900px 300px at 10% -20%, color-mix(in srgb, var(--gt-accent) 18%, transparent), transparent),
+    var(--gt-surface);
+  border-bottom: 1px solid var(--gt-line);
+}
+.gt-hero-inner { max-width: 1200px; margin: 0 auto; padding: 48px 20px 40px; }
+.gt-eyebrow {
+  margin: 0 0 8px; font-size: 14px; font-weight: 700; letter-spacing: .04em;
+  color: var(--gt-accent);
+}
+.gt-hero h1 {
+  margin: 0; font-size: clamp(28px, 4.2vw, 40px); line-height: 1.3; letter-spacing: .01em;
+}
+.gt-lead { margin: 12px 0 0; max-width: 46em; color: var(--gt-muted); font-size: 18px; }
+
+.gt-cards {
+  margin-top: 28px;
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.gt-card {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 18px; border-radius: var(--gt-radius);
+  background: var(--gt-surface); border: 1px solid var(--gt-line);
+  box-shadow: var(--gt-shadow);
+  color: var(--gt-ink) !important; text-decoration: none;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.gt-card:hover { transform: translateY(-2px); border-color: var(--gt-accent); }
+.gt-card-num {
+  flex: none; width: 36px; height: 36px; border-radius: 10px;
+  display: grid; place-items: center; font-weight: 700;
+  background: var(--gt-soft); color: var(--gt-accent);
+}
+.gt-card strong { display: block; font-size: 16.5px; line-height: 1.5; }
+.gt-card small { display: block; color: var(--gt-muted); font-size: 14px; line-height: 1.6; margin-top: 2px; }
+
+/* ── 本体（左に目次、右に本文） ──────────── */
+
+.gt-body {
+  max-width: 1200px; margin: 0 auto; padding: 32px 20px 64px;
+  display: grid; grid-template-columns: 256px minmax(0, 1fr); gap: 40px;
+}
+@media (max-width: 960px) {
+  .gt-body { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-top: 20px; }
+}
+
+.gt-toc { position: sticky; top: calc(var(--gt-top-h) + 24px); align-self: start; max-height: calc(100vh - var(--gt-top-h) - 48px); overflow: auto; }
+.gt-toc-title { font-size: 13px; font-weight: 700; color: var(--gt-muted); letter-spacing: .06em; margin: 0 0 8px 12px; }
+.gt-toc ol { list-style: none; margin: 0; padding: 0; }
+.gt-toc li { margin: 0; }
+.gt-toc a {
+  display: block; padding: 6px 12px; border-radius: 8px;
+  color: var(--gt-muted); text-decoration: none; font-size: 15px; line-height: 1.5;
+  border-left: 3px solid transparent;
+}
+.gt-toc a:hover { color: var(--gt-ink); background: var(--gt-soft); }
+.gt-toc a.is-active { color: var(--gt-accent); font-weight: 700; background: var(--gt-soft); border-left-color: var(--gt-accent); }
+.gt-toc ol ol { display: none; margin: 2px 0 6px 14px; }
+.gt-toc li.is-open > ol { display: block; }
+.gt-toc ol ol a { font-size: 14px; padding: 4px 10px; }
+
+.gt-toc details > summary { display: none; }
+@media (max-width: 960px) {
+  .gt-toc { position: static; max-height: none; }
+  .gt-toc details {
+    background: var(--gt-surface); border: 1px solid var(--gt-line);
+    border-radius: var(--gt-radius); padding: 4px 8px;
+  }
+  .gt-toc details > summary {
+    display: block; cursor: pointer; padding: 10px 8px; font-weight: 700; list-style: none;
+  }
+  .gt-toc details > summary::after { content: "▾"; float: right; color: var(--gt-muted); }
+  .gt-toc details[open] > summary::after { content: "▴"; }
+  .gt-toc-title { display: none; }
+  .gt-toc ol ol { display: block; }
+}
+
+/* ── 本文 ───────────────────────────── */
+
+.gt-content { min-width: 0; }
+.gt-content > :first-child { margin-top: 0; }
+.gt-content p, .gt-content ul, .gt-content ol { margin: 0 0 1em; }
+.gt-content li { margin: .25em 0; }
+.gt-content li > p { margin: 0; }
+.gt-content strong { font-weight: 700; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--gt-accent) 16%, transparent) 62%); }
+.gt-content hr { display: none; }
+
+/* 大見出しごとにカードにまとめる（guide-theme.js が section で包む） */
+.gt-section {
+  background: var(--gt-surface); border: 1px solid var(--gt-line);
+  border-radius: calc(var(--gt-radius) + 4px); box-shadow: var(--gt-shadow);
+  padding: 28px 32px; margin: 0 0 28px;
+}
+.gt-section.gt-intro { background: transparent; border: 0; box-shadow: none; padding: 0 4px; }
+@media (max-width: 640px) {
+  .gt-section { padding: 20px 18px; border-radius: var(--gt-radius); }
+}
+
+.gt-content h2, .gt-content h3, .gt-content h4 { line-height: 1.45; scroll-margin-top: calc(var(--gt-top-h) + 16px); }
+.gt-content h2 {
+  font-size: 25px; margin: 0 0 18px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--gt-line);
+  display: flex; align-items: center; gap: 14px;
+}
+.gt-content h3 { font-size: 19.5px; margin: 1.8em 0 .6em; padding-left: 12px; border-left: 4px solid var(--gt-accent); }
+.gt-content h4 { font-size: 17px; margin: 1.5em 0 .4em; }
+.gt-step {
+  flex: none; width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 19px; font-weight: 800;
+  background: var(--gt-accent); color: var(--gt-accent-ink);
+}
+.gt-anchor {
+  margin-left: auto; font-size: 15px; font-weight: 400; text-decoration: none;
+  color: var(--gt-muted) !important; opacity: 0; transition: opacity .15s;
+}
+h2:hover .gt-anchor, h3:hover .gt-anchor, .gt-anchor:focus { opacity: 1; }
+h3 .gt-anchor { margin-left: 8px; }
+
+/* 番号つきの手順 */
+.gt-content ol:not(.gt-plain) { counter-reset: gt; list-style: none; padding-left: 0; }
+.gt-content ol:not(.gt-plain) > li {
+  counter-increment: gt; position: relative; padding: 4px 0 4px 44px; margin: 8px 0;
+}
+.gt-content ol:not(.gt-plain) > li::before {
+  content: counter(gt); position: absolute; left: 0; top: 4px;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 15px; font-weight: 700; line-height: 1;
+  background: var(--gt-soft); color: var(--gt-accent); border: 1.5px solid color-mix(in srgb, var(--gt-accent) 35%, transparent);
+}
+.gt-content ul { padding-left: 1.3em; }
+.gt-content ul > li::marker { color: var(--gt-accent); }
+
+.gt-content code {
+  font-family: var(--gt-mono); font-size: .88em;
+  background: color-mix(in srgb, var(--gt-ink) 7%, transparent);
+  padding: .12em .4em; border-radius: 6px;
+}
+.gt-content pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow: auto; }
+.gt-content pre code { background: none; padding: 0; color: inherit; }
+
+/* 画像と動画 */
+.gt-content img, .gt-content video {
+  display: block; max-width: 100%; height: auto;
+  border-radius: 12px; border: 1px solid var(--gt-line);
+  box-shadow: var(--gt-shadow); background: #000;
+}
+.gt-content img { background: transparent; }
+.gt-content video { width: 100%; margin: 4px 0 10px; }
+.gt-content p > img:only-child { margin: 8px 0; }
+.gt-content p > em:only-child { display: block; color: var(--gt-muted); font-size: 14.5px; font-style: normal; }
+
+/* 表 */
+.gt-table { overflow-x: auto; margin: 0 0 1.2em; border: 1px solid var(--gt-line); border-radius: 12px; }
+.gt-content table { border-collapse: collapse; width: 100%; font-size: 15.5px; line-height: 1.7; }
+.gt-content th, .gt-content td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--gt-line); }
+.gt-content tr:last-child td { border-bottom: 0; }
+.gt-content th { background: var(--gt-soft); font-weight: 700; white-space: nowrap; }
+.gt-content td:first-child { font-weight: 600; min-width: 9em; }
+
+/* ── 囲み（ポイント・メモ・注意） ────────────
+ * Markdown では引用の直後に {: .point } / {: .note } / {: .warning } を付ける。 */
+
+.gt-content blockquote {
+  margin: 1.2em 0; padding: 14px 18px 14px 18px;
+  border-radius: 12px; border: 1px solid var(--gt-line); border-left: 5px solid var(--gt-muted);
+  background: color-mix(in srgb, var(--gt-muted) 6%, var(--gt-surface));
+}
+.gt-content blockquote > :last-child { margin-bottom: 0; }
+.gt-content blockquote.point   { --gt-c: var(--gt-point); }
+.gt-content blockquote.note    { --gt-c: var(--gt-note); }
+.gt-content blockquote.warning { --gt-c: var(--gt-warn); }
+.gt-content blockquote.point, .gt-content blockquote.note, .gt-content blockquote.warning {
+  border-left-color: var(--gt-c);
+  background: color-mix(in srgb, var(--gt-c) 8%, var(--gt-surface));
+}
+.gt-callout-label {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 800; font-size: 14.5px; letter-spacing: .03em; color: var(--gt-c); margin-bottom: 4px;
+}
+.gt-callout-label svg { width: 18px; height: 18px; flex: none; }
+
+/* ── タブ（Windows / Mac など） ──────────── */
+
+.gt-tabbar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin: 1.4em 0 0; padding: 5px; width: fit-content; max-width: 100%;
+  background: color-mix(in srgb, var(--gt-ink) 6%, transparent); border-radius: 12px;
+}
+.gt-tabbar button {
+  font: inherit; font-size: 15.5px; font-weight: 600; cursor: pointer;
+  border: 0; border-radius: 9px; padding: 7px 18px; background: transparent; color: var(--gt-muted);
+}
+.gt-tabbar button[aria-selected="true"] { background: var(--gt-surface); color: var(--gt-ink); box-shadow: var(--gt-shadow); }
+.gt-tabpanel { padding: 14px 2px 2px; }
+.gt-tabpanel[hidden] { display: none; }
+.gt-tabpanel > h3:first-child { display: none; }
+
+/* ── よくある質問（{: .faq } を付けた箇条書き） ── */
+
+.gt-faq { display: grid; gap: 10px; margin: 0 0 1.2em; }
+.gt-faq details { border: 1px solid var(--gt-line); border-radius: 12px; background: var(--gt-surface); }
+.gt-faq summary {
+  cursor: pointer; list-style: none; padding: 12px 44px 12px 16px; position: relative; font-weight: 700;
+}
+.gt-faq summary::-webkit-details-marker { display: none; }
+.gt-faq summary::after {
+  content: "+"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 22px; font-weight: 400; color: var(--gt-accent);
+}
+.gt-faq details[open] summary::after { content: "−"; }
+.gt-faq details[open] summary { border-bottom: 1px solid var(--gt-line); }
+.gt-faq .gt-faq-body { padding: 12px 16px; }
+.gt-faq summary strong { background: none; }
+
+/* ── 下 ─────────────────────────────── */
+
+.gt-foot { border-top: 1px solid var(--gt-line); background: var(--gt-surface); }
+.gt-foot-inner { max-width: 1200px; margin: 0 auto; padding: 24px 20px; color: var(--gt-muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+.gt-foot a { color: var(--gt-muted); }
+
+.gt-totop {
+  position: fixed; right: 20px; bottom: 20px; z-index: 40;
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gt-line);
+  background: var(--gt-surface); color: var(--gt-ink); box-shadow: var(--gt-shadow);
+  font-size: 20px; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.gt-totop.is-shown { opacity: 1; pointer-events: auto; }
+
+@media print {
+  .gt-top, .gt-toc, .gt-totop, .gt-cards, .gt-anchor { display: none !important; }
+  .gt-body { display: block; }
+  .gt-section { box-shadow: none; break-inside: auto; }
+  .gt-tabpanel[hidden] { display: block; }
+  .gt-tabpanel > h3:first-child { display: block; }
+  .gt-tabbar { display: none; }
+}

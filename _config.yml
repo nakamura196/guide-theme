@@ -1,0 +1,7 @@
+# このリポジトリの GitHub Pages（見本のページ）の設定。
+title: guide-theme
+description: A page layout for end-user guides of applications
+lang: ja
+guide_theme:
+  assets: /assets   # 見本では、このリポジトリの CSS / JS をそのまま使う
+exclude: [README.md, LICENSE, scripts]
