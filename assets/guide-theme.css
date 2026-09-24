@@ -243,6 +243,7 @@ h3 .gt-anchor { margin-left: 8px; }
   font-family: var(--gt-mono); font-size: .88em;
   background: color-mix(in srgb, var(--gt-ink) 7%, transparent);
   padding: .12em .4em; border-radius: 6px;
+  overflow-wrap: break-word; /* 長いパスが本文の幅を押し広げないように */
 }
 .gt-content pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow: auto; }
 .gt-content pre code { background: none; padding: 0; color: inherit; }
@@ -265,6 +266,7 @@ h3 .gt-anchor { margin-left: 8px; }
 .gt-content tr:last-child td { border-bottom: 0; }
 .gt-content th { background: var(--gt-soft); font-weight: 700; white-space: nowrap; }
 .gt-content td:first-child { font-weight: 600; min-width: 9em; }
+.gt-content td.gt-nowrap { white-space: nowrap; } /* 「0.1 MiB」のような短い値を 2 行に割らない */
 
 /* ── 囲み（ポイント・メモ・注意） ────────────
  * Markdown では引用の直後に {: .point } / {: .note } / {: .warning } を付ける。 */

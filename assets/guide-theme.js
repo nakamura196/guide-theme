@@ -105,6 +105,13 @@
     var w = el("div", "gt-table");
     tb.parentNode.insertBefore(w, tb);
     w.appendChild(tb);
+    // 見出し行が空の表（項目と値だけの表によくある書き方）は、空の帯を出さない。
+    var th = tb.querySelector("thead");
+    if (th && !th.textContent.trim()) th.hidden = true;
+    // 短い値（数値と単位など）は途中で改行しない。
+    tb.querySelectorAll("td").forEach(function (td) {
+      if (td.textContent.trim().length <= 12) td.classList.add("gt-nowrap");
+    });
   });
 
   // 6. タブ: <div class="tabs" markdown="1"> の中の h3 が 1 つずつタブになる。
