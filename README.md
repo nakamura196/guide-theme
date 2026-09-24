@@ -81,6 +81,7 @@ Sites then copy the new layout file.
 ## Used by
 
 - [Archival Packager](https://nakamura196.github.io/archival-packager/guide/)
+- [Local OCR](https://nakamura196.github.io/local-ocr/guide.html)
 
 ## License
 
