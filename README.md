@@ -39,8 +39,16 @@ quick_links:                   # entry cards (optional)
   - { title: Install, text: Windows and Mac, url: "#1-install" }
   - { title: Troubleshooting, url: "#troubleshooting", mark: "?" }
 footer: "Contact: someone@example.org"
+description: For search results and link previews (optional; otherwise the lead)
+image: /assets/ogp-en.png      # link-preview image for this page (optional)
 ---
 ```
+
+The page head carries what link previews and search engines need: `canonical`,
+Open Graph (`og:title`, `og:description`, `og:url`, `og:site_name`, `og:locale`,
+`og:image`), a Twitter card, and `hreflang` links for both languages with
+absolute URLs (the `alternate` URL is resolved against the page). These need
+`url` to be set, which GitHub Pages does for you.
 
 Site-wide options in `_config.yml` (all optional):
 
@@ -48,6 +56,7 @@ Site-wide options in `_config.yml` (all optional):
 guide_theme:
   accent: "#0f766e"      # accent colour
   logo: /assets/icon.png # small image at the top left (otherwise the first letter)
+  image: /assets/ogp.png # link-preview image (1200 x 630 works everywhere)
 ```
 
 ## Write it
