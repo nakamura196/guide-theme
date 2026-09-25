@@ -1,0 +1,29 @@
+# GitHub Pages（このフォルダを公開サイトとして配信する）の設定。
+# guide-theme の site-template から作った（https://github.com/nakamura196/guide-theme）。
+#
+# 独自ドメイン https://__DOMAIN__ で出す（docs/CNAME）。
+# DNS は __DOMAIN__ → __OWNER__.github.io の CNAME。Cloudflare なら「プロキシなし」にする
+# （プロキシを通すと GitHub が HTTPS の証明書を取れない）。
+# 旧 URL（__OWNER__.github.io/__NAME__/…）は GitHub が新 URL へ転送する。
+# ストアの掲載情報などが旧 URL を指したままなら、CNAME を外すとその転送が止まって切れる。
+title: __APP__
+description: TODO 検索結果とリンクの見出しに出る 1 文（日本語）。
+theme: jekyll-theme-minimal
+
+# 左上のアイコンと、共有したときに出る画像（OGP）。
+# 英語のページは front matter の image で ogp-en.png に差し替える。
+# OGP 画像は scripts/docs/make_ogp.py で作る。
+guide_theme:
+  logo: /assets/icon.png
+  image: /assets/ogp/ogp-ja.png
+
+# すべてのページを guide-theme で出す。各ページの front matter で上書きできる。
+defaults:
+  - scope: { path: "" }
+    values:
+      layout: guide
+      lang: ja
+      footer: "お問い合わせ / Contact: __CONTACT__"
+      nav:
+        - { title: トップ, url: ./ }
+        - { title: GitHub, url: "https://github.com/__REPO__" }
