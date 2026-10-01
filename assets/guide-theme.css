@@ -152,6 +152,8 @@ body.gt {
 @media (max-width: 960px) {
   .gt-body { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-top: 20px; }
 }
+/* 目次が無いページは左の欄を作らず、本文を中央に置く（一行が長くなりすぎない幅で） */
+.gt-body-wide { grid-template-columns: minmax(0, 1fr); max-width: 920px; }
 
 .gt-toc { position: sticky; top: calc(var(--gt-top-h) + 24px); align-self: start; max-height: calc(100vh - var(--gt-top-h) - 48px); overflow: auto; }
 .gt-toc-title { font-size: 13px; font-weight: 700; color: var(--gt-muted); letter-spacing: .06em; margin: 0 0 8px 12px; }
