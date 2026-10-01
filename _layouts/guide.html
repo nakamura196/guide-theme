@@ -144,8 +144,12 @@ https://github.com/nakamura196/guide-theme
     </div>
   </div>
 
-  <div class="gt-body">
+  {%- comment -%} 目次は大見出し（##）から作る。大見出しが無いページ、または toc: false のページは左の欄を作らない。{%- endcomment -%}
+  {%- if page.toc != false and content contains "<h2" -%}{%- assign gt_has_toc = true -%}{%- else -%}{%- assign gt_has_toc = false -%}{%- endif %}
+  <div class="gt-body{% unless gt_has_toc %} gt-body-wide{% endunless %}">
+    {%- if gt_has_toc %}
     <aside class="gt-toc"></aside>
+    {%- endif %}
     <main class="gt-content" id="gt-main">
 {{ content }}
     </main>

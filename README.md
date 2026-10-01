@@ -39,6 +39,7 @@ quick_links:                   # entry cards (optional)
   - { title: Install, text: Windows and Mac, url: "#1-install" }
   - { title: Troubleshooting, url: "#troubleshooting", mark: "?" }
 footer: "Contact: someone@example.org"
+toc: false                     # no table of contents column (optional; pages without any `##` heading get none automatically)
 description: For search results and link previews (optional; otherwise the lead)
 image: /assets/ogp-en.png      # link-preview image for this page (optional)
 ---

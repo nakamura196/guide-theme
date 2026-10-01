@@ -246,6 +246,11 @@
       }
       window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
       spy();
+    } else {
+      // 見出しはあっても目次に載せるものが無かった。空の欄は消して本文を広げる。
+      toc.remove();
+      var body = document.querySelector(".gt-body");
+      if (body) body.classList.add("gt-body-wide");
     }
   }
 
